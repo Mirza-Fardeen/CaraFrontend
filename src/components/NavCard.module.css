@@ -1,0 +1,19 @@
+.box{
+    border-radius: 5px;
+    text-align: center;
+    height: auto;
+    width: auto;
+    /* background-color:rgb(203, 203, 203); */
+    color : rgb(18, 17, 16);
+    border: 1px solid transparent;
+    margin-bottom: 5px;
+    text-decoration: none;
+
+}
+:hover{
+    background-color: rgb(244, 239, 239);
+    color: grey;
+}
+.active{
+    background-color: blue;
+}

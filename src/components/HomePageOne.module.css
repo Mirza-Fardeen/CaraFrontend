@@ -1,0 +1,9 @@
+.firstBox{
+    display: flex;
+    position:relative;
+    left: 6%;
+    padding: 80px;
+}
+.box{
+    width:auto;
+}

@@ -1,0 +1,23 @@
+form{
+    margin:  auto 20%;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100ps;
+  border: 1px solid rgb(30, 33, 30);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2% 
+}
+.firstBox{
+  display: flex;
+  position:relative;
+  left: 6%;
+  padding: 80px;
+}

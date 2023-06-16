@@ -1,0 +1,6 @@
+.stickBox{
+  position: sticky;
+  top: 0;
+  max-width: 25%;
+  float: left;
+}
