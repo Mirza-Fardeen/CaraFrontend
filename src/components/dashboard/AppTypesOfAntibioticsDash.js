@@ -11,96 +11,23 @@ import BaseOptionChart from '../../charts/BaseOptionChart';
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [{
-    data: [{
-      x: 'Amoxicillin',
-      y: 55,
-      fillColor: "#26734D", 
-      strokeColor: "#26734D",
-  //     goals: [
-  //   {
-  //     name: 'Regional Average',
-  //     value: 160,
-  //     strokeColor: '#775DD0',
-  //   }
-  // ]
-    }, {
-      x: 'Doxycycline',
-      y: 15,
-      fillColor: '#26734D',
-      strokeColor: '#26734D',
-  //     goals: [
-  //   {
-  //     name: 'Regional Average',
-  //     value: 100,
-  //     strokeColor: '#775DD0',
-  //   }
-  // ]
-    }, {
-      x: 'Ciprofloxacin',
-      y: 5,
-      fillColor: '#cc3311',
-      strokeColor: '#cc3311',
-  //     goals: [
-  //   {
-  //     name: 'Regional Average',
-  //     value: 60,
-  //     strokeColor: '#775DD0',
-  //   }
-  // ]
-    }, {
-      x: 'Penicillin V',
-      y: 5,
-      fillColor: '#26734D',
-      strokeColor: '#26734D',
-  //     goals: [
-  //   {
-  //     name: 'Regional Average',
-  //     value: 40,
-  //     strokeColor: '#775DD0',
-  //   }
-  // ]
-    }, {
-      x: 'Azithromyzin',
-      y: 3,
-      fillColor: '#cc3311',
-      strokeColor: '#cc3311',
-  //     goals: [
-  //   {
-  //     name: 'Regional Average',
-  //     value: 35,
-  //     strokeColor: '#775DD0',
-  //   }
-  // ]
-    }, {
-      x: 'Co-amoxiclav', 
-      y: 10,
-      fillColor: '#cc3311',
-      strokeColor: '#cc3311',
-  //     goals: [
-  //   {
-  //     name: 'Regional Average',
-  //     value: 65,
-  //     strokeColor: '#775DD0',
-  //   }
-  // ]
-    }, {
-      x: 'Cephalexin',
-      y: 7,
-      fillColor: '#26734D',
-      strokeColor: '#26734D',
-  //     goals: [
-  //   {
-  //     name: 'Regional Average',
-  //     value: 40,
-  //     strokeColor: '#775DD0',
-  //   }
-  // ]
-    } ]
-  }];  
-const TOTAL = '1,890';
 
 function AppTypesOfAntibioticsDash(props) {
+ 
+let chart = [];
+  // console.log(props.antibioticDetails);
+for(const ls of props.antibioticDetails){
+
+  chart.push({x: ls.name, y: ls.count, 
+    fillColor: ls.color === 'Green'? '#26734D' :'#cc3311', strokeColor: ls.color});
+
+}
+// console.log("after")
+// console.log(chart);
+
+  
+const TOTAL = props.green + props.red;
+
   const chartOptionsTypes = merge(BaseOptionChart(), {
     tooltip: {
       marker: { show: false },
@@ -138,7 +65,7 @@ function AppTypesOfAntibioticsDash(props) {
   }, 
     xaxis: {
       min :0,
-      max : 100,
+      max : 1000,
       tickAmount: 4,
       title: {
             text: "%"
@@ -221,6 +148,10 @@ const chartOptionsComparisons = merge(BaseOptionChart(), {
     },
     }
     },
+    xaxis: {
+      min :0,
+      max: 1000,
+    }
   });    
 
 const CHART_DATA_Resist = [{
@@ -324,15 +255,17 @@ const CHART_DATA_Resist = [{
         }
       }}
   });
-  const abPracticeGreen = 1200;
-  const abPracticeRed = 500;
+  const abPracticeGreen = props.userGreen;
+  const abPracticeRed = props.userRed;
 
   const abHospitalGreen = props.green;
   const abHospitalRed = props.red;
-  const pre= CHART_DATA.map(({data}) => data);
+  // const pre= CHART_DATA.map(({data}) => data);
   const res = CHART_DATA_Resist.map(({data})=> data)
 
-  let types_prescribed_ordered = pre[0].sort(function(a, b){return b.y - a.y })
+  let types_prescribed_ordered = chart;
+  // pre[0].sort(function(a, b){return b.y - a.y });
+
 
   return (
     <Card sx={{boxShadow: 'none'}}> 

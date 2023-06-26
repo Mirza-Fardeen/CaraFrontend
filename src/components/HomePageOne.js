@@ -7,10 +7,13 @@ import AppTotalAgeDash from './dashboard/AppTotalAgeDash';
 import AppTotalLabDash from './dashboard/AppTotalLabDash';
 import AppTypesOfAntibioticsDash from './dashboard/AppTypesOfAntibioticsDash';
 import classes from './HomePageOne.module.css';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData ,redirect} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import LogInForm from './LogInForm';
+import Filter from './FilterComponent';
 
+
+let pathId;
 let data = {
   ab: {
     total: 1960,
@@ -37,7 +40,6 @@ let data = {
 
 function  HomePageOne(){
  const [pres,setPre]= useState({pre: 0, ant:0});
-
 
 
  const dat = useLoaderData();
@@ -68,8 +70,11 @@ load();
 return (
     <>
      
+     
       <Container maxWidth="xl" >
+     
       <Box sx={{ pb: 5 }}>
+      
         </Box>
         {/* Filters */}
         <Grid container spacing={12}> 
@@ -113,7 +118,10 @@ return (
           </Grid>
           <Grid item xs={12} md={6} lg={12}>
             <AppTypesOfAntibioticsDash green={dat.green}
-                                        red={dat.red}/>
+                                        red={dat.red}
+                                        userGreen={dat.userGreen}
+                                        userRed={dat.userRed}
+                                        antibioticDetails={dat.antibioticDetails}/>
           </Grid>
           </Grid> 
 
@@ -129,15 +137,20 @@ export default HomePageOne;
 
 export async function loader(){
 let consult;
-let pres;
 
 let color;
 
+let userCol;
 
+let antibioticDetails;
 
 const appConsultAnt = await fetch("http://localhost:8080/user/consulAnt");
 // const appPresAnt = await fetch("http://localhost:8080/user/presAnt");
 const appPresColor = await fetch("http://localhost:8080/user/presColor");
+
+const userColor = await fetch(`http://localhost:8080/user/presColor/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2`);
+
+const allAntibioticDetails = await fetch("http://localhost:8080/user/getAntibioticDetails");
 if(!appConsultAnt.ok){
   return json({message: 'Could not save event '} , {status: 500});
 }
@@ -148,17 +161,38 @@ else{
   consult= await appConsultAnt.clone().json();
 
   color = await appPresColor.clone().json();
+  userCol = await userColor.clone().json();
+  antibioticDetails = await allAntibioticDetails.clone().json();
 
+  if(!pathId){
+    // return redirect('/')
+  }
   // con: consult.allConsultations , 
   // conAnt: consult.allConsultAntibiotics, 
   // pres: pres.allPrescriptions , presAnt: pres.allPrescripAntibiotics
 return {con: consult.allConsultations , 
   conAnt: consult.allConsultAntibiotics, 
   pres: 15500 , presAnt: 1400,
-   green: color.green , red: color.red};
+   green: color.green , red: color.red , userGreen : userCol.green 
+   , userRed: userCol.red , antibioticDetails: antibioticDetails};
 
 // return {consult: consult , pres: pres}
 
  }
 
 }
+export async function action({request , params}){
+  try{
+      console.log("its clicked")
+      const data = await request.formData();
+      console.log(data.get('username'));
+      pathId = "af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2"
+      
+  }
+  catch(err){
+      
+  }
+  
+ return redirect('/dashboard/app');
+}
+

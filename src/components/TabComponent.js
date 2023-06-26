@@ -48,7 +48,7 @@ export default function BasicTabs(props) {
       navigate('/dashboard/app')
     }
     if(value===1){
-      navigate('/dasboard/comparison')
+      navigate('/dashboard/comparison')
     }
     if(value===2){
       navigate('/dashboard/audit')

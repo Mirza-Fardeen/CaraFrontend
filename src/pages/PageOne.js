@@ -14,25 +14,13 @@ return(
         </div>
         <main>
             {/* <HomePageThree/> */}
-           <LogInForm/>
+          
             {/* <Outlet/> */}
         </main>
     </Fragment>
     
 )
 }
-export async function action({request , params}){
-    try{
-        console.log("its clicked")
-        const data = await request.formData();
-        console.log(data.get('username'));
-        
-    }
-    catch(err){
-        
-    }
-    
-   return null;
-}
+
 
 export default PageOne;
