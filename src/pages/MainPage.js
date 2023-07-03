@@ -13,13 +13,21 @@ function MainPage(){
     // },[]);
 return(
     <Fragment>
-        <div className="stickBox">
+       <div className="grid-container">
+        <div className="item-1">
         <SideNavBar />
-        </div>
-        <main>
-        <BasicTabs />
-            <Outlet/>
-        </main>
+
+             </div>
+         <div className="item-2" >
+             <BasicTabs />
+            
+             <Outlet/>
+          </div>
+       </div>
+       
+      
+        
+       
         
     </Fragment>
 )

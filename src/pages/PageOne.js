@@ -9,14 +9,15 @@ function PageOne(){
 return(
 
          <Fragment>
-            <div className="stickBox">
+            <div className="item-1">
         <SideNavBar />
-        </div>
-        <main>
-            {/* <HomePageThree/> */}
-          
-            {/* <Outlet/> */}
-        </main>
+
+             </div>
+         <div className="item-2">
+             {/* <BasicTabs />
+            <Outlet/> */}
+      
+          </div>
     </Fragment>
     
 )

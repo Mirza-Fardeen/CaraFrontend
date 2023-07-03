@@ -1,38 +1,43 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import NavCard from "./NavCard";
-import classes from './SideNavBar.css';
+import classes from './SideNavBar.module.css';
 import logo from '../pictures/logo.jpg';
+import { BorderRight } from "@mui/icons-material";
 function SideNavBar(){
-  const classes = 'list-group-item list-group-item-action py-2 ripple';
+
+  useState(false)
+
     return (
         <Fragment>
  
-<nav id="sidebarMenu" className="collapse d-lg-block sidebar collapse bg-white">
-    <div className="position-sticky">
-      <div className="list-group list-group-flush mx-3 mt-4">
-        <img src={logo} />
+<nav>
+
+      <div style={{display: 'block'}}>
+
+       <img src={logo} style={{height : '30vh' , width : '100%'}} />
+      </div>
+      
       <NavLink to='/dashboard/app'
-          className={({isActive})=>
-          isActive ? `${classes} active`: classes 
-          }
-           end={true}
-           style={{textDecoration: 'none'}} >
-        <i
-            className="fas fa-lock fa-fw me-3"></i><span>Select Dashboard</span>
+
+         className={classes.lin}
+         >
+          {({ isActive, isPending }) => (
+    <div className={isActive ? classes.linBoxActive : 
+      classes.linBox}>Select Dashboard</div>)
+  }
+          
+        </NavLink>
+      <NavLink to='/page'
+       className={classes.lin}
+        >
+            {({ isActive, isPending }) => (
+    <div className={isActive ? classes.linBoxActive :
+       classes.linBox}>My Practice</div>)}
+    
         </NavLink>
       
-        <NavLink to='/page'
-        className={({isActive})=>
-        isActive ? `${classes} active` : classes
-        }
-        style={{textDecoration: 'none' }} >
-        <i
-            className="fas fa-lock fa-fw me-3"></i><span>My Practice</span>
-        </NavLink>
- 
-      </div>
-    </div>
+        
   </nav>
         </Fragment>
     )

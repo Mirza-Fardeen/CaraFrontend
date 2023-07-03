@@ -1,9 +1,11 @@
 .filter{
     /* display: flex; */
+   
     text-align: center;
     border: 2px solid rgb(223, 213, 213);
     max-width: 100%;
     background-color: white;
+    opacity: 0.9;
     border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -16,7 +18,12 @@
     border: none;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(39, 96, 83);
+    font-size: 1.2rem;
+    color: rgb(45, 88, 88);
+   
+}
+.link:hover{
+  color: #e05050;
 }
 label{
     z-index: 2;
@@ -29,16 +36,18 @@ label{
   }
 
 .dropbtn {
-    margin-left: 20px;
+    display: block;
     background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
     color: rgb(94, 206, 187);
     padding: 10px;
-    font-size: 16px;
+    font-size: 1.6rem;
     border: 1px solid  rgb(67, 139, 127);
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 5px;
   }
+
   
 /* .dropbtn:hover, .dropbtn:focus {
     background-color: #2980B9;
@@ -49,6 +58,16 @@ label{
     display: flexbox;
 
   }
+.field{
+  display : inline-block;
+  text-align: center;
+  align-items:self-start;
+  justify-content: center;
+  
+ 
+  margin-left: 15px;
+
+}
   
 .dropdowncontent {
     display: none;
@@ -60,6 +79,7 @@ label{
     transition: 1s;
     z-index: 1;
   }
+
   
 .dropdowncontent a {
     color: black;
@@ -72,11 +92,13 @@ label{
 
 .ageshow {
     margin-left: 40px;
-    display: block;}
+    display: inline;}
 
 .genshow {
+  
+  margin-top: -5px;
    margin-left: 40px;
-    display: block;}
+    display: inline;}
 .ageContainer{
     text-align: center;
     justify-content: center;

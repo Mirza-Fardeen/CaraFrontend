@@ -5,29 +5,43 @@ import { useLoaderData } from 'react-router';
 
 import BaseOptionChart from '../../charts/BaseOptionChart';
 
-const CHART_DATA_Consultations = [{
+
+
+
+
+
+export default function AppConsultPrescribeComponent(props) {
+
+  const {presbody , consultBody} = props.values;
+
+  const presMax = Math.max(presbody.yourPrescriptions,
+     presbody.yourAntibioticPrescriptions,
+     presbody.filterPrescriptions,
+      presbody.filterAntibioticPrescriptions) +500;
+  const consultMax = Math.max(
+    consultBody.yourConsultations, consultBody.yourAntibioticConsultations,
+    consultBody.filterConsultations, consultBody.filterAntibioticConsultations
+  ) +500;
+
+
+  const CHART_DATA_Consultations = [{
     name: 'Your practice',
-    data: [900, 100],
+    data: [consultBody.yourConsultations, consultBody.yourAntibioticConsultations],
     color: '#3E8397'},
   {
     name: 'Filtered practices average',
-    data: [580, 100],
+    data: [consultBody.filterConsultations, consultBody.filterAntibioticConsultations],
     color: '#6eb1c4'}
       ]
-
-
-const CHART_DATA_Prescriptions = [{
+  const CHART_DATA_Prescriptions = [{
     name: 'Your practice',
-    data: [1000, 90],
+    data: [presbody.yourPrescriptions, presbody.yourAntibioticPrescriptions],
     color: '#3E8397'},
   {
     name: 'Filtered practices average',
-    data: [910, 58],
+    data: [presbody.filterPrescriptions, presbody.filterAntibioticPrescriptions],
     color: '#6eb1c4'}
       ]
-
-export default function AppConsultPrescribeComponent({events}) {
-
   // console.log(`value of events ${events}`)
   const chartOptions_ConsultPrescribe = merge(BaseOptionChart(), {
     tooltip: {
@@ -73,7 +87,8 @@ export default function AppConsultPrescribeComponent({events}) {
       bar: 
       {horizontal: false,
       dataLabels: {
-      position: 'top'
+      position: 'top',
+      
     },
       columnWidth: '80%',
       distributed: false,
@@ -102,7 +117,7 @@ export default function AppConsultPrescribeComponent({events}) {
     yaxis: {
       show: false,
       min: 0,
-      max: 1000,
+      max: consultMax,
     },
 stroke: {
                 show: false,
@@ -181,7 +196,7 @@ stroke: {
     yaxis: {
       show: false,
       min: 0,
-      max: 1000,
+      max: presMax,
     },
 stroke: {
                 show: false,

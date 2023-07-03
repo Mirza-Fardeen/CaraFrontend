@@ -42,12 +42,19 @@ function getAge(e){
     e.preventDefault();
     e.stopPropagation();
    setAgeSelected(e.target.text);
+
+   setAgeBox(e=>{
+    return !e;
+   })
    };
 
 function getGender(e){
     e.preventDefault();
     e.stopPropagation();
     setGender(e.target.text);
+    setGengderBox(e=>{
+        return !e;
+    })
 
    }
     return (
@@ -60,39 +67,30 @@ function getGender(e){
             <div className={classes.content} style={{display: isColl ? 'block' : 'none'}}>
 
 <div  style={{display: 'flex'}}>
-<button onClick={setAgeVis} className={classes.dropbtn}>{ageSelected!=='Select Age' ? `Age ${ageSelected}`: 'Select Age'}</button>
-
-<button onClick={setGenderVis} className={classes.dropbtn}>{genderSelected!=='Select Gender'? genderSelected : 'Select Gender'}</button>
-</div>
-
-
-
-   <div style={{display: 'flex' ,marginBottom: '10px' }}>
-<div className={classes.ageContainer}>
-<div  className={`${ageBox? classes.dropdowncontent : classes.ageshow }`} > 
-
-<Link className={classes.link} onClick={getAge}> 4</Link>
-
-<Link className={classes.link} onClick={getAge}> 10</Link>
+    <div className={classes.field}>
+    <button onClick={setAgeVis} className={classes.dropbtn}>{ageSelected!=='Select Age' ? `Age ${ageSelected}`: 'Select Age'}</button>
+    <div  className={`${ageBox? classes.dropdowncontent : classes.ageshow }`} > 
+<Link className={classes.link} onClick={getAge} style={{marginTop: '-20px'}}> 10</Link>
 <Link className={classes.link} onClick={getAge}> 20</Link>
 <Link className={classes.link} onClick={getAge}> 40</Link>
+<Link className={classes.link} onClick={getAge}> 60</Link>
+<Link className={classes.link} onClick={getAge}> 80</Link>
    </div>
-</div>
+    </div>
 
+<div className={classes.field}>
 
-
-<div className={genderSelected==='Select Gender' ? classes.genderContainer :classes.genderContainerShift}>
+<button onClick={setGenderVis} className={classes.dropbtn}>{genderSelected!=='Select Gender'? genderSelected : 'Select Gender'}</button>
 <div  className={`${genderBox? classes.dropdowncontent : classes.genshow }`} > 
 
-<Link className={classes.link} onClick={getGender}> Male </Link>
+<Link className={classes.link} onClick={getGender} style={{marginTop: '-20px'}}> Male </Link>
 
 <Link className={classes.link} onClick={getGender}> Female</Link>
 
    </div>
 </div>
 
-
-   </div>
+</div>
 
      </div>
             

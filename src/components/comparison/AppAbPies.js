@@ -12,12 +12,13 @@ import BaseOptionChart from '../../charts/BaseOptionChart';
 // ----------------------------------------------------------------------
 
 //own practice
-const ABPractice = [100, 20]
 
+
+export default function AppAbPies(props) {
+  const ABPractice = [props.values.yourGreenAntibiotics, props.values.yourRedAntibiotics]
+ 
 //practices chosen through filter
-const ABOtherPractices = [135, 165]
-
-export default function AppAbPies() {
+const ABOtherPractices = [props.values.filterGreen, props.values.filterRed]
 const chartOptionsComparisons = merge(BaseOptionChart(), {
     tooltip: {
       marker: { show: false },

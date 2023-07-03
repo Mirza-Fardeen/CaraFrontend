@@ -36,91 +36,76 @@ console.log(e.target.value)
 }
     return (
         <Fragment>
-            {/* <div className={classes}>
-                {mouse && <p style={{position:'absolute',left: `${x}px` , top:`${y}px`}}>true</p>}
-                <h2  > Third component</h2>
-            <h2 onMouseEnter={getValue} onMouseLeave={resetValue}> Third component</h2>
-            </div> */}
+         
 
-        {/* <div className={classes.log}>
-       <span className={classes.boxTwo}> 
-        <div className={classes.box}>
-        <label> username</label>
-         <input type='text' />
-         <label> password</label>
-         <input type='text' />
-        </div>
-       </span>
-
-      </div> */}
-
-
-<div className={classes.container}>
-<Container maxWidth="xl" >
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={12}>
             <Typography variant="h2"  color='#22577A'>Audit</Typography>
-            <br />
-            <br />
-            <Typography variant="subtitle1"  color='#22577A'>To carry out your audit, set your goal and decide a timeframe.</Typography>
-            <br />
-            <br />
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-            <Typography variant="h4" color='#54b5bc'>1. Goal</Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-
-          </Grid>
-
-
-          <Grid item xs={12} sm={6} md={6}>
-
            
-            <select onChange={Change} className={classes.selector}>
-       
-      {
-       goals.map(e=> <option key={e.key} value={e.name}> {e.name}</option>)
-      }
-            </select>
+            <Typography variant="subtitle1"  color='#22577A'>To carry out your audit, set your goal and decide a timeframe.</Typography>
+        
+        
+      
+            <Typography variant="h4" color='#54b5bc'>1. Goal</Typography>
+     
 
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+    
 
-          </Grid>
-          <Grid item xs={2} sm={2} md={6}>
+
+
+
+
+           <div className={classes.radio} style={{marginLeft: '9px'}}>
+          
+           <input type="radio" id="html" name="fav_language" value="HTML" />
+                        <label for="html" >Reduce the percentage of antibiotic prescriptions</label>
+            </div>
+            <div className={classes.radio}>
+           
+           <input type="radio" id="css" name="fav_language" value="CSS"/>
+            <label for="css">Reduce the percentage of red antibiotic prescriptions</label>
+           </div>
+           <div className={classes.radio}>
+           
+               <input type="radio" id="javascript" name="fav_language" value="JAVASCRIPT"/>
+                       <label for="javascript">Reduce the number of antibiotic prescriptions</label>
+                      </div>
+         
+
+
+         
+        
             <Typography variant="h4" color='#54b5bc'>2. Timeframe</Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+       
+     
 
           
-          <select onChange={(e)=>{console.log(e.target.value)}} className={classes.selector}>
+          <div className={classes.radio} style={{marginLeft: '9px'}}>
+          
+           <input type="radio" id="1" name="fav_language" value="1" />
+                        <label for="1" >1 month</label>
+            </div>
+            <div className={classes.radio}>
+           
+           <input type="radio" id="3" name="fav_language" value="3"/>
+            <label for="3">3 months</label>
+           </div>
+           <div className={classes.radio}>
+           
+               <input type="radio" id="12" name="fav_language" value="12"/>
+                       <label for="12">12 months</label>
+                      </div>
+        
+        
        
-       {
-        tfs.map(e=> <option key={e.key} value={e.name}> {e.name}</option>)
-       }
-             </select>
-
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-
-          </Grid>
-
-          <Grid item xs={6} sm={6} md={6}>
             <Button size="large" variant="outlined" color='secondary' onClick={redirectUser}>
               <Typography variant="subtitle1" color='#22577A'>Generate report</Typography>
             </Button>
-          </Grid>
+         
 
 
-        </Grid>
-      </Container>
+       
      
-      </div>
-      
+     
+  
         </Fragment>
     )
 }

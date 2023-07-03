@@ -14,92 +14,110 @@ import Filter from "./FilterComponent";
 import { defer , Await, useLoaderData} from "react-router-dom";
 import { trim } from "lodash";
 
-let Age ;
-
-let Gender;
-
-let value;
 
 function HomePageTwo(){
 
+const [valuePrescribeConsultation , setvaluePrescribeConsultation]= useState(null);
+const [colorDetailAntibiotics , setColorDetailAntibiotics] = useState(null);
+const [colorNameDetailsAntibiotics , setColorNameDetailsAntibiotics] = useState(null);
+
+
 const [sta , setsta]= useState(false);
+const [age,setAge] = useState(null);
+const [gender,setGender]= useState(null);
 
 const getData=(data)=>{
 const {age , gender}= data;
- Age =age;
- Gender = gender;
+setAge(age);
+setGender(gender);
+
 }
 
 
 async function sendData (){
-// const body= getByGenderAndAge(Gender,Age);
 
-const ca = getByGenderAndAge(Gender , Age);
+let consultPrescription = getByGenderAndAge(gender , age);
+
+let colorDetail =getColorCompareAntibiotics(gender,age);
+
+let colorNameDetail = getColorNameDetails(gender,age);
 setsta(true)
-value = ca;
-console.log(await ca)
-
+setvaluePrescribeConsultation(consultPrescription);
+setColorDetailAntibiotics(colorDetail);
+setColorNameDetailsAntibiotics(colorNameDetail);
 }
 
 return(
     <Fragment>
+      <div className={classes.filter}>
+      <Filter setData={getData} />
+      <button onClick={sendData} className={classes.btnFilter}>  Submit </button>
+      </div>
+     
+
       
-      
-      <Container maxWidth="xl" >
-     <Grid container spacing={12}>   
-     <Grid item xs={12} sm={6} md={12} >
-      <Filter setData={getData}/>
-      <button onClick={sendData}>  submit </button>
-      </Grid>   
-          <Grid item xs={12} sm={6} md={12}>
+         
           <Typography variant='h2' color='#22577A'>Antibiotics</Typography>
                   <Typography variant="subtitle1"  color='#22577A'>Graphs display data for 12 months previous to the last upload.</Typography>
-          <br />
+        
           <Button variant="contained" href=''>Upload new data</Button>
-          <br></br>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} >
-          <AppTotalAB />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+        
+        
+          <div className={classes.apptotal}>
+            <div className={classes.total}>
+            <AppTotalAB />
+            </div>
+       
+            <div className={classes.total}>
             <AppTotalDuration />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <AppTotalLabResults />
-          </Grid>
-    </Grid>
-    <Grid container spacing={4} sx={{ borderRadius: 0}}>       
-          <Grid item xs={12} md={6} lg={12}>
+              </div>      
+        <div className={classes.total}>
+        <AppTotalLabResults />
+        </div>
+            
+          </div>
+         
+
+          <div>
            
-            {/* <AppConsultPrescribeComponent /> */}
             {sta &&
                <Suspense fallback={<p>Loading....</p>}>
-               <Await resolve={value}>
+               <Await resolve={valuePrescribeConsultation}>
               
-                 {(event)=> <p> {event}</p>}
+                 {(event)=> <AppConsultPrescribeComponent values={event} />}
                 </Await>
                </Suspense>
             }
            
+           </div>
          
-          </Grid>
-          {/* <Grid item xs={12} md={6} lg={12} id="antibiotics">
-            <AppAbPies />
-          </Grid>
-          <Grid item xs={12} md={6} lg={12}>
-            <AppTypesOfAB />
-          </Grid>
-          <Grid item xs={12} md={6} lg={12}>
-            <AppResistanceAB />
-          </Grid>
-          <Grid item xs={12} md={6} lg={12}>
-            <AppAgeOverview/>
-          </Grid>
-          <Grid item xs={12} md={6} lg={12}>
-            <AppLineAB/>
-          </Grid> */}
-     </Grid>
-    </Container>
+          <div>
+         {sta &&
+          <Suspense fallback={<p>Loading....</p>}>
+          <Await resolve={colorDetailAntibiotics}>
+         
+            {(event)=> <AppAbPies  values={event} />}
+           </Await>
+          </Suspense>
+          
+         }
+         </div>
+     
+        
+          <div>
+
+          {sta &&
+          <Suspense fallback={<p>Loading....</p>}>
+          <Await resolve={colorNameDetailsAntibiotics}>
+         
+            {(event)=> <AppTypesOfAB values={event} />}
+           </Await>
+          </Suspense>
+          
+         }
+        
+        </div>
+       
     </Fragment>
 )
 }
@@ -111,11 +129,34 @@ export default HomePageTwo;
 export async function getByGenderAndAge(gender,age){
 
   const gen= trim(gender);
-  const req = await fetch(`http://localhost:8080/user/getByGenderAndAge/Male/40`);
+  const pres = await fetch(`http://localhost:8080/user/getByGenderAndAge/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2/${gen}/${age}`);
+  const consult =  await fetch(`http://localhost:8080/user/getConsultation/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2/${gen}/${age}`)
+  const presbody = await pres.clone().json();
+  const consultBody = await consult.clone().json();
 
-  const body = await req.clone().json();
+  return {presbody , consultBody};
+}
 
-  return body;
+export async function getColorCompareAntibiotics(gender,age){
+
+  const gen = trim(gender);
+
+ const color= await fetch(`http://localhost:8080/user/getColorComparison/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2/${gen}/${age}`);
+
+ const body =await color.clone().json();
+
+ return body;
+}
+
+export async function getColorNameDetails(gender , age){
+
+  const gen = trim(gender);
+
+ const color= await fetch(`http://localhost:8080/user/getColorNameDetails/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2/${gen}/${age}`);
+
+ const body =await color.clone().json();
+
+ return body;
 }
 
   

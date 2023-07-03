@@ -2,6 +2,7 @@ import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 // material
 import { Box, Card, CardHeader, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
 // utils
 
 //
@@ -24,24 +25,52 @@ const CHART_DATA_RED = [{
     }, 
 ];  
 
-const CHART_DATA_GREEN = [{
-      name: 'Amoxicillin',
-      data: [135, 56],
-    }, 
-    {
-      name: 'Doxycycline',
-      data: [85, 110],
-     }, 
-    {
-      name: 'Penicillin V',
-      data: [23, 0],
-    }, 
-    {
-      name: 'Cephalexin',
-      data: [64, 86],
-    } ];  
 
-export default function AppTypesOfAB() {
+
+export default function AppTypesOfAB(props) {
+  const list = props.values;
+  const red =list.filter(e=> e.color === 'Red');
+  const green= list.filter(e=> e.color ==='Green');
+
+ const [series, setSeries]=useState(null);
+
+const greenls = [];
+  for(const greenList of green){
+    greenls.push({
+      name: greenList.name,
+      data: [greenList.yourCount, greenList.filterCount],
+    })
+  }
+const redls = [];
+for(const redList of red){
+  redls.push({
+    name: redList.name,
+    data: [redList.yourCount, redList.filterCount],
+  })
+}
+
+const gr = greenls.slice(0,4);
+
+
+
+
+
+  const CHART_DATA_GREEN = [{
+    name: 'Amoxicillin',
+    data: [135, 56],
+  }, 
+  {
+    name: 'Doxycycline',
+    data: [85, 110],
+   }, 
+  {
+    name: 'Penicillin V',
+    data: [23, 0],
+  }, 
+  {
+    name: 'Cephalexin',
+    data: [64, 86],
+  } ];  
   const chartOptionsTypes = merge({}, {
     tooltip: {
       marker: { show: false },
@@ -50,18 +79,24 @@ export default function AppTypesOfAB() {
           // format: 'dd MMM',
           formatter: undefined,
         title: {
-          formatter: (seriesName) => seriesName,
+          formatter: (seriesName) => {
+            console.log(seriesName)
+            return seriesName},
         }
       },
       y: { 
         //formatter: (seriesName) => 'TOTAL'/100*fNumber(seriesName),
         formatter: function(value, opts) {
+          // console.log(opts)
               const sum = opts.series[0].reduce((a, b) => a + b, 0);
               const percent = (value / sum) * 100;
               return percent.toFixed(0) + '%'
           },
         title: {
-          formatter: (seriesName) => seriesName+':'
+          formatter: (seriesName) => {
+           
+           return seriesName+':';
+          }
         }
       },
     },
@@ -97,6 +132,22 @@ export default function AppTypesOfAB() {
                   },
                 },
 },
+dataLabels:{
+
+enabled: true ,
+formatter: function (val, { seriesIndex, dataPointIndex, w }) {
+  if(w.config.series[seriesIndex].name.length > 17){
+    return w.config.series[seriesIndex].name.substring(0,17)+ "....."
+   }
+  return w.config.series[seriesIndex].name
+},
+style: {
+  fontSize: '13px',
+  fontFamily: 'Helvetica, Arial, sans-serif',
+  fontWeight: 'bold',
+ 
+},
+},
 legend: {
   show: false
 },
@@ -109,6 +160,7 @@ legend: {
       },
     yaxis: {
       max: 150,
+      categories: [" blah "],
       tickAmount: 1,
       labels: {
         show: false,
@@ -137,6 +189,8 @@ const chartOptionsTypes_RED = merge({}, {
         formatter: function(value, opts) {
               const sum = opts.series[0].reduce((a, b) => a + b, 0);
               const percent = (value / sum) * 100;
+           
+              
               return percent.toFixed(0) + '%'
           },
         title: {
@@ -176,9 +230,28 @@ const chartOptionsTypes_RED = merge({}, {
                   },
                 },
 },
+dataLabels:{
+
+  enabled: true ,
+  formatter: function (val, { seriesIndex, dataPointIndex, w }) {
+    if(w.config.series[seriesIndex].name.length > 17){
+      return w.config.series[seriesIndex].name.substring(0,17)+ "....."
+     }
+    return w.config.series[seriesIndex].name
+  },
+  textAnchor: 'middle',
+  distributed: false,
+  style: {
+    fontSize: '13px',
+    fontFamily: 'Helvetica, Arial, sans-serif',
+    fontWeight: 'bold',
+   
+  },
+  },
 legend: {
   show: false
 },
+
  xaxis: {
       type: 'category',
       categories: ["Your practice", "Filtered practices"],
@@ -208,13 +281,13 @@ legend: {
       <Stack direction="row" justifyContent="space-evenly" alignItems="flex-end" spacing={6} mt={1}>
       <Box sx={{ mx: 1, width: 500, height: 400 }} dir="ltr">
         <ReactApexChart type="bar" 
-        series={CHART_DATA_GREEN} 
+        series={gr} 
         options={chartOptionsTypes} 
         />
       </Box>
        <Box sx={{ mx: 1, width: 500, height: 400 }} dir="ltr">
         <ReactApexChart type="bar" 
-        series={CHART_DATA_RED} 
+        series={redls} 
         options={chartOptionsTypes_RED} 
         />
       </Box>

@@ -21,3 +21,33 @@ input{
   left: 6%;
   padding: 80px;
 }
+.bck{
+  background-color: white;
+}
+.bck :hover{
+  background-color: white;
+}
+.btnFilter{
+  color: rgb(108, 108, 108);
+  margin-top: 5px;
+  background-color: whitesmoke;
+border: 2px solid #67c4c3;
+border-radius: 3px;
+padding: 5px;
+}
+.apptotal{
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.total{
+  width: 40vb;
+  height : 25vh;
+}
+.filter{
+  position: sticky;
+  top: 10px;
+  z-index: 1;
+  margin-bottom: 5px;
+}

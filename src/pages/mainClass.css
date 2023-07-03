@@ -1,6 +1,25 @@
-.stickBox{
-  position: sticky;
-  top: 0;
-  max-width: 25%;
-  float: left;
+
+.grid-container{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto 
+  auto auto auto auto  auto auto auto auto;
+  grid-template-rows:  auto;
+
+
+}
+.item-1{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  width: 35vh;
+  height: 100vh;
+  
+}
+
+.item-2{
+height: auto;
+padding: 20px;
+grid-column-start: 2;
+grid-column-end: 15;
+box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+ 
 }
