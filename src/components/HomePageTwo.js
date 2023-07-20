@@ -25,17 +25,21 @@ const [colorNameDetailsAntibiotics , setColorNameDetailsAntibiotics] = useState(
 const [sta , setsta]= useState(false);
 const [age,setAge] = useState(null);
 const [gender,setGender]= useState(null);
-
+const [fromDate , setFromDate] = useState(null);
+const [toDate , setToDate] = useState(null);
 const getData=(data)=>{
-const {age , gender}= data;
+const {age , gender , fromDate , toDate}= data;
 setAge(age);
 setGender(gender);
+setFromDate(fromDate);
+setToDate(toDate);
 
 }
 
 
 async function sendData (){
 
+ console.log(toDate)
 let consultPrescription = getByGenderAndAge(gender , age);
 
 let colorDetail =getColorCompareAntibiotics(gender,age);
@@ -129,8 +133,8 @@ export default HomePageTwo;
 export async function getByGenderAndAge(gender,age){
 
   const gen= trim(gender);
-  const pres = await fetch(`http://localhost:8080/user/getByGenderAndAge/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2/${gen}/${age}`);
-  const consult =  await fetch(`http://localhost:8080/user/getConsultation/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2/${gen}/${age}`)
+  const pres = await fetch(`http://localhost:8080/user/getPrescription/f2146b31077b51520b6aa2384269c8b9c03011c620aeb12dcbcc43ff93020d2f/${gen}/${age}`);
+  const consult =  await fetch(`http://localhost:8080/user/getConsultation/f2146b31077b51520b6aa2384269c8b9c03011c620aeb12dcbcc43ff93020d2f/${gen}/${age}`)
   const presbody = await pres.clone().json();
   const consultBody = await consult.clone().json();
 
@@ -140,8 +144,8 @@ export async function getByGenderAndAge(gender,age){
 export async function getColorCompareAntibiotics(gender,age){
 
   const gen = trim(gender);
-
- const color= await fetch(`http://localhost:8080/user/getColorComparison/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2/${gen}/${age}`);
+// af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2
+ const color= await fetch(`http://localhost:8080/user/getColorComparison/f2146b31077b51520b6aa2384269c8b9c03011c620aeb12dcbcc43ff93020d2f/${gen}/${age}`);
 
  const body =await color.clone().json();
 
@@ -152,7 +156,7 @@ export async function getColorNameDetails(gender , age){
 
   const gen = trim(gender);
 
- const color= await fetch(`http://localhost:8080/user/getColorNameDetails/af74269e8e4319a4d73e2321a60d8acb91f4ffa27e5bdd7c4a6822cc9f86baa2/${gen}/${age}`);
+ const color= await fetch(`http://localhost:8080/user/getColorNameDetails/f2146b31077b51520b6aa2384269c8b9c03011c620aeb12dcbcc43ff93020d2f/${gen}/${age}`);
 
  const body =await color.clone().json();
 

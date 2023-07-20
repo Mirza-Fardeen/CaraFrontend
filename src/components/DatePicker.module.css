@@ -1,0 +1,15 @@
+.datepicker{   
+ border: 1px solid  rgb(67, 139, 127);
+}
+.datepicker input[type="text"]{
+    border: 1px solid  rgb(67, 139, 127);
+    color: rgb(94, 206, 187);
+    font-size: 20px;
+    padding: 10px;
+}
+.datepicker input:focus[type="text"]{
+    border: 1px solid  rgb(67, 139, 127);
+}
+.datepicker input:active[type="text"]{
+    border: 1px solid  rgb(67, 139, 127);
+}

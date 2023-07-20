@@ -50,7 +50,7 @@ const {colorChart ,consultationAndPrescription}=useLoaderData()
  const [age,setAge] = useState(null);
  const [gender,setGender]= useState(null);
  const getData=(data)=>{
-  const {age , gender}= data;
+  const {age , gender }= data;
   setAge(age);
   setGender(gender);
   
@@ -80,10 +80,10 @@ return (
      
    
      
-    
+      
         {/* Filters */}
     
-        
+       
                   <Typography variant="h2"  color='#22577A'>Antibiotics</Typography>
                  <Typography variant="subtitle1"  color='#22577A'>Graphs display data for 12 months previous to the last upload.</Typography>
        

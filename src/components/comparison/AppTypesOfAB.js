@@ -142,7 +142,7 @@ formatter: function (val, { seriesIndex, dataPointIndex, w }) {
   return w.config.series[seriesIndex].name
 },
 style: {
-  fontSize: '13px',
+  fontSize: '10px',
   fontFamily: 'Helvetica, Arial, sans-serif',
   fontWeight: 'bold',
  
@@ -242,7 +242,7 @@ dataLabels:{
   textAnchor: 'middle',
   distributed: false,
   style: {
-    fontSize: '13px',
+    fontSize: '10px',
     fontFamily: 'Helvetica, Arial, sans-serif',
     fontWeight: 'bold',
    

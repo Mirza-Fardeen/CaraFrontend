@@ -16,11 +16,11 @@ export default function AppConsultPrescribeComponent(props) {
 
   const presMax = Math.max(presbody.yourPrescriptions,
      presbody.yourAntibioticPrescriptions,
-     presbody.filterPrescriptions,
-      presbody.filterAntibioticPrescriptions) +500;
+     presbody.othersPrescriptions,
+      presbody.othersAntibioticPrescriptions) +500;
   const consultMax = Math.max(
     consultBody.yourConsultations, consultBody.yourAntibioticConsultations,
-    consultBody.filterConsultations, consultBody.filterAntibioticConsultations
+    consultBody.othersConsultations, consultBody.othersAntibioticConsultations
   ) +500;
 
 
@@ -29,8 +29,8 @@ export default function AppConsultPrescribeComponent(props) {
     data: [consultBody.yourConsultations, consultBody.yourAntibioticConsultations],
     color: '#3E8397'},
   {
-    name: 'Filtered practices average',
-    data: [consultBody.filterConsultations, consultBody.filterAntibioticConsultations],
+    name: 'Others practices average',
+    data: [consultBody.othersConsultations, consultBody.othersAntibioticConsultations],
     color: '#6eb1c4'}
       ]
   const CHART_DATA_Prescriptions = [{
@@ -38,8 +38,8 @@ export default function AppConsultPrescribeComponent(props) {
     data: [presbody.yourPrescriptions, presbody.yourAntibioticPrescriptions],
     color: '#3E8397'},
   {
-    name: 'Filtered practices average',
-    data: [presbody.filterPrescriptions, presbody.filterAntibioticPrescriptions],
+    name: 'Others practices average',
+    data: [presbody.othersPrescriptions, presbody.othersAntibioticPrescriptions],
     color: '#6eb1c4'}
       ]
   // console.log(`value of events ${events}`)
@@ -101,7 +101,7 @@ export default function AppConsultPrescribeComponent(props) {
   dataLabels: {
     enabled: true,
     style: {
-        colors: ['#fff']
+        colors: ['#000']
     },
     offsetY: 10
   },
@@ -180,7 +180,7 @@ stroke: {
   dataLabels: {
     enabled: true,
     style: {
-        colors: ['#fff']
+        colors: ['#000']
     },
     offsetY: 10
   },
